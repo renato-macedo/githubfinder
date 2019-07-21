@@ -22,7 +22,7 @@ const Users = ({ users, loading }) => {
 
 
 Users.propTypes = {
-  users: PropTypes.arrayOf.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

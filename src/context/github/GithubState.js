@@ -10,6 +10,18 @@ import {
     GET_REPOS,
 } from '../types';
 
+let githubClientId;
+let githubClientSecret;
+
+if (process.env.NODE_ENV !== 'production') {
+    githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
+    githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+} else {
+    githubClientId = process.env.GIHUB_CLIENT_ID;
+    githubClientSecret = process.env.GITHUB_CLIENT_CLIENT_SECRET;
+}
+
+
 function GithubState(props) {
     const initialState = {
         users: [],
@@ -25,7 +37,7 @@ function GithubState(props) {
         setLoading();
     
         console.log('Pesquisando: ', text);
-        const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}$client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+        const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=${githubClientId}$client_secret=${githubClientSecret}`);
 
         console.log(res.data);
         dispatch({
@@ -38,7 +50,7 @@ function GithubState(props) {
     async function getUser(username) {
         setLoading();
         // console.log('Pesquisando: ', username);
-        const res = await axios.get(`https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}$client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+        const res = await axios.get(`https://api.github.com/users/${username}?client_id=${githubClientId}$client_secret=${githubClientSecret}`);
 
         dispatch({
             type: GET_USER,
@@ -53,7 +65,7 @@ function GithubState(props) {
     async function getRepos(username) {
         setLoading();
         // console.log('Pesquisando: ', username);
-        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}$client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+        const res = await axios.get(`https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${githubClientId}$client_secret=${githubClientSecret}`);
     
         dispatch({
             type: GET_REPOS,

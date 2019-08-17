@@ -130,12 +130,12 @@ const User = (props) => {
 }
 
 User.propTypes = {
-  user: PropTypes.objectOf(PropTypes.func).isRequired,
+  user: PropTypes.object.isRequired,
   getUser: PropTypes.func.isRequired,
   getUserRepos: PropTypes.func.isRequired,
-  match: PropTypes.objectOf(PropTypes.func).isRequired,
+  match: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  repos: PropTypes.func.isRequired,
+  repos: PropTypes.array.isRequired,
 };
 
 export default User;
